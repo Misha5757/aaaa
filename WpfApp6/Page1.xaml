@@ -1,0 +1,56 @@
+﻿<Page x:Class="WpfApp6.Page1"
+      xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+      xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+      xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+      xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+      xmlns:local="clr-namespace:WpfApp6"
+      mc:Ignorable="d" 
+      d:DesignHeight="450" d:DesignWidth="800" Loaded="Page_Loaded"
+      Title="Page1">
+
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="50"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <Grid Grid.Row="1">
+            <ListView x:Name="Ss" >
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel  Orientation="Horizontal">
+                            <StackPanel >
+                                <Image Source="{Binding Image}" Width="150" Height="150" />
+                            </StackPanel>
+                            <StackPanel VerticalAlignment="Center"   >
+                                <Label Content="{Binding ID}"  ContentStringFormat="Ваш ИД : {0}" Margin="0 0 0 -8"/>
+                                <Label Content="{Binding CPU}" ContentStringFormat="Ваш CPU : {0}"/>
+                                <Label Content="{Binding RAM}" ContentStringFormat="Ваш Ram : {0}"/>
+                            </StackPanel>
+                        </StackPanel>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </Grid>
+        <Grid Grid.Row="0">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="*" />
+            </Grid.ColumnDefinitions>
+            <Grid Grid.Column="0">
+                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" VerticalAlignment="Center" >
+                    <TextBlock  Text="Поиск:" Width="50"/>
+                    <TextBox x:Name="Serach" Width="150" Height="20" TextChanged="Serach_TextChanged"
+                             />
+                </StackPanel>
+            </Grid>
+            <Grid Grid.Column="1" >
+                <ComboBox   x:Name="CmBox" Width="50" Height="20" SelectionChanged="CmBox_SelectionChanged" SelectedItem="{Binding SelectedItem}" >
+                    <ComboBoxItem Content="5"/>
+                    <ComboBoxItem Content="8"/>
+                    <ComboBoxItem Content="2"/>
+                </ComboBox>
+                <TextBox x:Name="Serach_Copy" Height="0" Margin="10,15,236,15"/>
+            </Grid>
+        </Grid>
+    </Grid>
+</Page>
