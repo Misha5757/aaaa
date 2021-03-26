@@ -1,0 +1,62 @@
+let auth = "vk_access_token_settings=friends,status&vk_app_id=7794757&vk_are_notifications_enabled=1&vk_is_app_user=1&vk_is_favorite=0&vk_language=ru&vk_platform=desktop_web&vk_ref=other&vk_ts=1616756822&vk_user_id=354507629&sign=H5fNdS8bUWIYuBwfer1ZzoQr9a3kV2BscyvIrXgOSqo"; // Токен авторизации
+ 
+ 
+function sleep(milliseconds) {
+  const date = Date.now();
+  let currentDate = null;
+  do {
+    currentDate = Date.now();
+  } while (currentDate - date < milliseconds);
+}
+ 
+ 
+ 
+let setJob = 1; // Работа. 1-ставить работу, 0- не ставить работу
+let setFetter = 1; // Оковы. 1-ставить оковы, 0- не ставить оковы
+ 
+ 
+ 
+function buy() {
+    let id = Math.floor(Math.random() * Math.floor(600000000)) + 1000;
+		fetch(`https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buySlave`, {
+			method: "POST",
+			headers: { "Content-Type": "application/json", authorization: auth },
+			body: JSON.stringify({
+				slave_id: id,
+			}),
+		});
+ 
+		console.log("Купил " + id);
+		sleep(100);
+ 
+		if (setJob) {
+			fetch(`https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/jobSlave`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json", authorization: auth },
+				body: JSON.stringify({
+					slave_id: id,
+					name: "Крепостной",   
+				}),
+			});
+		}
+ 
+        console.log("Поставил работу " + id);
+		sleep(100);
+ 
+ 
+		if (setFetter) {
+			fetch(`https://pixel.w84.vkforms.ru/HappySanta/slaves/1.0.0/buyFetter`, {
+				method: "POST",
+				headers: { "Content-Type": "application/json", authorization: auth },
+				body: JSON.stringify({
+					slave_id: id,
+				}),
+			});
+		}
+ 
+        console.log("Купил оковы " + id + "\n");
+		sleep(100);
+}
+ 
+setInterval(buy, 3500);
+// при 1000 и sleep(300) банит за 1500 очень маленький шанс бана.
